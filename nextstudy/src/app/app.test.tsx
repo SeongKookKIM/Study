@@ -1,21 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import Home from "./page";
 
-const user = {
-  name: "Tom",
-};
-
-test("snapshot: name 있음", () => {
-  const el = render(<Home user={user} />);
-  expect(el).toMatchSnapshot();
-});
-test("snapshot: name 없음", () => {
-  const el = render(<Home />);
-  expect(el).toMatchSnapshot();
+test("유저가 없으면 로그인 문구와 버튼을 보여준다.", () => {
+  render(<Home />);
+  const txtEl = screen.getByText(/로그인을 해주세요/);
+  const btnEl = screen.getByRole("button");
+  expect(txtEl).toBeInTheDocument();
+  expect(btnEl).toBeInTheDocument();
+  expect(btnEl).toHaveTextContent("로그인");
 });
 
-test("Hello 라는 글자가 포함되는가?", () => {
-  render(<Home user={user} />);
-  const helloEl = screen.getByText(/Hello/i);
-  expect(helloEl).toBeInTheDocument();
+test("유저가 없으면 로그인 문구와 버튼을 보여준다.", () => {
+  render(<Home user={{ name: "kim" }} />);
+  const txtEl = screen.getByText(/kim님 환영합니다/);
+  expect(txtEl).toBeInTheDocument();
 });
