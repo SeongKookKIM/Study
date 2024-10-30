@@ -1,0 +1,12 @@
+.header {
+  @apply flex justify-between items-center px-5 py-5 relative;
+}
+
+.title {
+  @apply absolute left-1/2 transform -translate-x-1/2 text-xl font-bold;
+}
+
+.backBtn,
+.addTodoBtn {
+  @apply font-medium text-lg text-black cursor-pointer;
+}

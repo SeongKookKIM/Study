@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import "../shared/style/global.css";
 import RecoilRootWrapper from "../shared/utils/RecoilWrapper";
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="flex justify-center h-screen">
         <RecoilRootWrapper>{children}</RecoilRootWrapper>
       </body>
     </html>
