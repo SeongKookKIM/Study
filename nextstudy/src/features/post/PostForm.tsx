@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import style from "./Post.module.css";
+import style from "./PostForm.module.css";
 import { useAddPost } from "@/entities/Post/PostActions";
 import { useRouter } from "next/navigation";
 
-function Post() {
+function PostForm() {
   const addPost = useAddPost();
   const [title, setTitlte] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -50,4 +50,4 @@ function Post() {
   );
 }
 
-export default Post;
+export default PostForm;

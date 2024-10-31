@@ -1,0 +1,18 @@
+.postList {
+  @apply w-full px-5 pt-5;
+}
+
+.postListUl {
+  @apply w-full border-y-4 border-gray-200;
+}
+.postListLi {
+  @apply w-full py-5 border-b-4 border-gray-200 last:border-0 cursor-pointer;
+}
+.postListTitle {
+  @apply text-xl font-bold;
+}
+
+.postListUndefined {
+  @apply w-full flex justify-center items-center;
+  height: calc(100vh - 150px);
+}
