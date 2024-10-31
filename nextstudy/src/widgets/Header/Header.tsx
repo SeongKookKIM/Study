@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import style from "./Header.module.css";
 import { HeaderModel } from "@/entities/Header/HeaderModel";
 import { useRouter } from "next/navigation";

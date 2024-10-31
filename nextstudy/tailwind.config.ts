@@ -12,6 +12,9 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      gap: {
+        "10px": "10px",
+      },
     },
   },
   plugins: [],

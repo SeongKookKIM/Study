@@ -1,0 +1,21 @@
+.post {
+  @apply px-5 pt-8 flex flex-col gap-8 justify-center items-center;
+}
+
+.titleBox,
+.contentBox {
+  @apply w-full flex flex-col gap-10px;
+}
+
+.title,
+.content {
+  @apply text-xl font-bold;
+}
+
+.titleInput,
+.contentTextarea {
+  @apply py-3 px-4 block w-full border-gray-200 rounded-lg text-xl focus:border-blue-100 focus:ring-blue-100 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-400 dark:border-neutral-700 dark:text-neutral-50 dark:placeholder-neutral-50 dark:focus:ring-neutral-600;
+}
+.contentTextarea {
+  @apply min-h-48;
+}
