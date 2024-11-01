@@ -23,7 +23,7 @@ input {
 }
 
 .cm-wrapper {
-  @apply w-full max-w-[600px] border border-x-neutral-400 border-solid p-0;
+  @apply w-full max-w-[600px] border border-x-neutral-400 border-solid p-0 overflow-scroll;
 }
 
 .cm-button {
