@@ -4,11 +4,12 @@ import { postState } from "@/entities/Post/PostState";
 import { useRecoilValue } from "recoil";
 import style from "./PostList.module.css";
 import { Post } from "@/entities/Post/PostModel";
+import { useRouter } from "next/navigation";
 
 export default function PostList() {
   const posts = useRecoilValue(postState);
 
-  console.log(posts);
+  const router = useRouter();
 
   return (
     <div className={style.postList}>
@@ -16,7 +17,11 @@ export default function PostList() {
         <ul className={style.postListUl}>
           {posts.map((post: Post, index: number) => {
             return (
-              <li className={style.postListLi}>
+              <li
+                key={index}
+                className={style.postListLi}
+                onClick={() => router.push(`/todoDetail/${index}`)}
+              >
                 <h3 className={style.postListTitle}>{post.title}</h3>
               </li>
             );

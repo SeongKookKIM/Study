@@ -1,0 +1,21 @@
+.detailWrapper {
+  @apply px-5 pt-8 flex flex-col gap-16;
+}
+.title {
+  @apply w-full text-3xl font-bold text-right;
+}
+.content {
+  @apply w-full min-h-48 dark:bg-neutral-400 rounded-lg px-2 py-2;
+}
+
+.detailBtnbox {
+  @apply w-full flex justify-center items-center gap-4;
+}
+
+.edtit {
+  @apply bg-sky-900;
+}
+
+.delete {
+  @apply bg-red-600;
+}

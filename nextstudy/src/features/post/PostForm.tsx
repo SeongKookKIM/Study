@@ -13,7 +13,6 @@ function PostForm() {
   const router = useRouter();
 
   const hanlderAddPost = () => {
-    console.log(title, content);
     if (title && content) {
       addPost({ title, content });
       setTitlte("");
