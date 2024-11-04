@@ -5,7 +5,7 @@ export default function addTodo() {
   return (
     <div className="cm-wrapper">
       <Header backBtn={true} title="New Post" newPostBtn={false} />
-      <PostForm />
+      <PostForm newPost={true} />
     </div>
   );
 }

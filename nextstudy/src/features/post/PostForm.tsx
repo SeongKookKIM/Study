@@ -4,8 +4,9 @@ import { useState } from "react";
 import style from "./PostForm.module.css";
 import { useAddPost } from "@/entities/Post/PostActions";
 import { useRouter } from "next/navigation";
+import { PostPropsModel } from "@/entities/Post/PostPropsModel";
 
-function PostForm() {
+function PostForm({ newPost, defaultTitle, defaultContent }: PostPropsModel) {
   const addPost = useAddPost();
   const [title, setTitlte] = useState<string>("");
   const [content, setContent] = useState<string>("");
@@ -29,6 +30,7 @@ function PostForm() {
         <input
           type="text"
           className={style.titleInput}
+          value={newPost ? "" : defaultTitle}
           onChange={(e) => setTitlte(e.target.value)}
         />
       </div>
@@ -38,6 +40,7 @@ function PostForm() {
         <textarea
           typeof="text"
           className={style.contentTextarea}
+          value={newPost ? "" : defaultContent}
           onChange={(e) => setContent(e.target.value)}
         />
       </div>
