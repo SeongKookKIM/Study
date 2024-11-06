@@ -34,8 +34,6 @@ function PostForm({
   };
 
   const hanlderEdiptPost = () => {
-    console.log(title);
-    console.log(content);
     if (title && content) {
       const editPost: Post = {
         id: index,
