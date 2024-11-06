@@ -12,7 +12,9 @@ function Header({ backBtn, title, newPostBtn }: HeaderModel) {
       <div className={style.backBtn}>
         {backBtn ? <p onClick={() => router.back()}>back</p> : ""}
       </div>
-      <h1 className={style.title}>{title}</h1>
+      <h1 className={style.title} onClick={() => router.push("/")}>
+        {title}
+      </h1>
       <div className={style.addTodoBtn}>
         {newPostBtn ? (
           <p onClick={() => router.push("/addTodo", { scroll: true })}>

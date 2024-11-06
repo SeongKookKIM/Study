@@ -1,7 +1,7 @@
 "use client";
 
 import { useRecoilCallback, useSetRecoilState } from "recoil";
-import { postState } from "./PostState";
+import { editPostState, postState } from "./PostState";
 import { Post } from "./PostModel";
 
 function useAddPost() {
@@ -12,9 +12,9 @@ function useAddPost() {
 }
 
 function useEditPost() {
-  return useRecoilCallback(({ set }) => (index: number, updatePost: Post) => {
+  return useRecoilCallback(({ set }) => (updatePost: Post) => {
     set(postState, (prev) =>
-      prev.map((post, i) => (i === index ? updatePost : post))
+      prev.map((post, i) => (i === updatePost.id ? updatePost : post))
     );
   });
 }
@@ -25,4 +25,11 @@ function useDeletePost() {
   });
 }
 
-export { useAddPost, useEditPost, useDeletePost };
+function useEditPostInfo() {
+  const editPostInfo = useSetRecoilState(editPostState);
+  return (editPost: Post) => {
+    editPostInfo(editPost);
+  };
+}
+
+export { useAddPost, useEditPost, useDeletePost, useEditPostInfo };

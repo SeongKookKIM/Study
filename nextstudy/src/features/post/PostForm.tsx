@@ -1,17 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./PostForm.module.css";
-import { useAddPost } from "@/entities/Post/PostActions";
+import { useAddPost, useEditPost } from "@/entities/Post/PostActions";
 import { useRouter } from "next/navigation";
 import { PostPropsModel } from "@/entities/Post/PostPropsModel";
+import { Post } from "@/entities/Post/PostModel";
 
-function PostForm({ newPost, defaultTitle, defaultContent }: PostPropsModel) {
+function PostForm({
+  newPost,
+  defaultTitle,
+  index,
+  defaultContent,
+}: PostPropsModel) {
   const addPost = useAddPost();
   const [title, setTitlte] = useState<string>("");
   const [content, setContent] = useState<string>("");
 
   const router = useRouter();
+
+  const recoilEditPost = useEditPost();
 
   const hanlderAddPost = () => {
     if (title && content) {
@@ -20,8 +28,38 @@ function PostForm({ newPost, defaultTitle, defaultContent }: PostPropsModel) {
       setContent("");
 
       router.push("/");
+    } else {
+      window.alert("제목과 내용을 입력해주세요.");
     }
   };
+
+  const hanlderEdiptPost = () => {
+    if (title && content) {
+      const editPost: Post = {
+        id: index,
+        title,
+        content,
+      };
+
+      recoilEditPost(editPost);
+
+      router.push("/");
+    } else {
+      window.alert("제목과 내용을 입력해주세요.");
+    }
+  };
+
+  useEffect(() => {
+    if (newPost) {
+      setTitlte(defaultTitle ?? "");
+      setContent(defaultContent ?? "");
+    }
+
+    return () => {
+      setTitlte("");
+      setContent("");
+    };
+  }, [newPost, defaultTitle, defaultContent]);
 
   return (
     <div className={style.post}>
@@ -30,7 +68,7 @@ function PostForm({ newPost, defaultTitle, defaultContent }: PostPropsModel) {
         <input
           type="text"
           className={style.titleInput}
-          value={newPost ? "" : defaultTitle}
+          defaultValue={newPost ? "" : defaultTitle}
           onChange={(e) => setTitlte(e.target.value)}
         />
       </div>
@@ -40,14 +78,20 @@ function PostForm({ newPost, defaultTitle, defaultContent }: PostPropsModel) {
         <textarea
           typeof="text"
           className={style.contentTextarea}
-          value={newPost ? "" : defaultContent}
+          defaultValue={newPost ? "" : defaultContent}
           onChange={(e) => setContent(e.target.value)}
         />
       </div>
 
-      <button type="button" className="cm-button" onClick={hanlderAddPost}>
-        작성하기
-      </button>
+      {newPost ? (
+        <button type="button" className="cm-button" onClick={hanlderAddPost}>
+          작성하기
+        </button>
+      ) : (
+        <button type="button" className="cm-button" onClick={hanlderEdiptPost}>
+          수정하기
+        </button>
+      )}
     </div>
   );
 }

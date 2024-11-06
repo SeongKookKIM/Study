@@ -3,7 +3,7 @@
 }
 
 .title {
-  @apply absolute left-1/2 transform -translate-x-1/2 text-xl font-bold;
+  @apply absolute left-1/2 transform -translate-x-1/2 text-xl font-bold cursor-pointer;
 }
 
 .backBtn,

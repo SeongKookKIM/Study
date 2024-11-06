@@ -2,6 +2,7 @@
 
 import { Post } from "@/entities/Post/PostModel";
 import { useRouter } from "next/navigation";
+import { title } from "process";
 import { SetterOrUpdater } from "recoil";
 
 export class TodoDetailViewModel {
@@ -9,13 +10,21 @@ export class TodoDetailViewModel {
 
   constructor(
     private posts: Post[],
-    private setPosts: SetterOrUpdater<Post[]>
+    private setPosts: SetterOrUpdater<Post[]>,
+    private editPostInfo: (editPost: Post) => void
   ) {}
 
   // 수정 버튼
-  editBtn() {
-    console.log("수정버튼 클릭.");
-    this.router.push("/");
+  editBtn(post: Post, index: number) {
+    try {
+      const postInfo = {
+        id: index,
+        title: post.title,
+        content: post.content,
+      };
+      this.editPostInfo(postInfo);
+      this.router.push("/editTodo");
+    } catch {}
   }
 
   // 삭제버튼

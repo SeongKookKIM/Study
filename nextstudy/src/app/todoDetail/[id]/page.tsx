@@ -6,20 +6,21 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 
 import { Post } from "@/entities/Post/PostModel";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { TodoDetailViewModel } from "@/features/todoDetail/todoDetail";
+import { useEditPostInfo } from "@/entities/Post/PostActions";
 
 export default function todoDetail() {
-  const router = useRouter();
   const state = useParams();
   const posts = useRecoilValue(postState);
   const setPosts = useSetRecoilState(postState);
+  const editPostInfo = useEditPostInfo();
 
   //State
   const [post, setPost] = useState<Post | null>(null);
 
   //View Model
-  const viewModel = new TodoDetailViewModel(posts, setPosts);
+  const viewModel = new TodoDetailViewModel(posts, setPosts, editPostInfo);
 
   useEffect(() => {
     setPost(posts[Number(state.id)]);
@@ -27,11 +28,14 @@ export default function todoDetail() {
 
   // Edit
   const handlerEditBtn = () => {
-    viewModel.editBtn();
+    if (post) {
+      viewModel.editBtn(post, Number(state.id));
+    } else {
+      console.log("post 데이터가 존재하지 않습니다.");
+    }
   };
 
   // Delete
-
   const hanlderDeleteBtn = () => {
     viewModel.deleteBtn(Number(state.id));
   };
@@ -40,16 +44,8 @@ export default function todoDetail() {
     <div className="cm-wrapper">
       <Header backBtn={true} title="Post" newPostBtn={true} />
       <div className={style.detailWrapper}>
-        <h3 className={style.title}>{post?.title}11</h3>
-        <p className={style.content}>
-          {post?.content}Fast Refresh had to perform a full reload. Read more:
-          https://nextjs.org/docs/messages/fast-refresh-reloadFast Refresh had
-          to perform a full reload. Read more:
-          https://nextjs.org/docs/messages/fast-refresh-reloadFast Refresh had
-          to perform a full reload. Read more:
-          https://nextjs.org/docs/messages/fast-refresh-reloadFast Refresh had
-          to perform a full reload. Read more:
-        </p>
+        <h3 className={style.title}>{post?.title}</h3>
+        <p className={style.content}>{post?.content}</p>
         <div className={style.detailBtnbox}>
           <button
             type="button"
