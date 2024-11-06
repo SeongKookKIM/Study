@@ -34,6 +34,8 @@ function PostForm({
   };
 
   const hanlderEdiptPost = () => {
+    console.log(title);
+    console.log(content);
     if (title && content) {
       const editPost: Post = {
         id: index,
@@ -50,7 +52,7 @@ function PostForm({
   };
 
   useEffect(() => {
-    if (newPost) {
+    if (!newPost) {
       setTitlte(defaultTitle ?? "");
       setContent(defaultContent ?? "");
     }
@@ -68,7 +70,7 @@ function PostForm({
         <input
           type="text"
           className={style.titleInput}
-          defaultValue={newPost ? "" : defaultTitle}
+          value={title}
           onChange={(e) => setTitlte(e.target.value)}
         />
       </div>
@@ -78,7 +80,7 @@ function PostForm({
         <textarea
           typeof="text"
           className={style.contentTextarea}
-          defaultValue={newPost ? "" : defaultContent}
+          value={content}
           onChange={(e) => setContent(e.target.value)}
         />
       </div>
