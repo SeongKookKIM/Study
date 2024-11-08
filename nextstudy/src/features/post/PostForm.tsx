@@ -21,11 +21,26 @@ function PostForm({
 
   const recoilEditPost = useEditPost();
 
-  const hanlderAddPost = () => {
+  const hanlderAddPost = async () => {
     if (title && content) {
       addPost({ title, content });
       setTitlte("");
       setContent("");
+
+      try {
+        const response = await fetch("/api/post", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title: title, content: content }),
+        });
+
+        const result = await response.json();
+        console.log("Post요청 완료", result);
+      } catch {
+        console.warn("DB 저장실패");
+      }
 
       router.push("/");
     } else {
